@@ -462,7 +462,7 @@ else:
             # flush chain at end of section
             if chain:###
                 parts.append(chain)###
-        return parts
+            return parts
 
     mk = (st.session_state.get("product_row") or {}).get("MakineTipi")
     s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
