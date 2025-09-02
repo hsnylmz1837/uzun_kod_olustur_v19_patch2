@@ -451,7 +451,9 @@ else:
 
                 # Adjacent support (only within a section)
                 adj = str(fld.get("Adjacent")).strip().lower() #in ("true", "1", "yes")###
-                chain += piece+str(adj)
+                if adj==1:
+                    chain += piece+str(adj)
+                
                 
                   
             # flush chain at end of section
