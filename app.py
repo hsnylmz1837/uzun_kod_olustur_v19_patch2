@@ -32,11 +32,7 @@ def _go_home():
 
 # match Streamlit widget label size
 st.markdown('<style>.field-label{font-size:0.875rem;font-weight:600;line-height:1.25rem;}</style>', unsafe_allow_html=True)
-# quick access
-st.write("")
-if st.button("🏠 Anasayfa", key="home_btn_top"):
-    _go_home()
-# --- end v19_patch3 block ---
+
 
 import qrcode
 
@@ -75,6 +71,12 @@ with right:
         _image_wc("data/coiltech_logo.png")
     except Exception:
         pass
+
+# quick access
+st.write("")
+if st.button("🏠 Anasayfa", key="home_btn_top"):
+    _go_home()
+# --- end v19_patch3 block ---
 
 @st.cache_data
 def read_schema(file)->dict:
@@ -345,6 +347,7 @@ else:
                                             else: st.session_state["form_values"].pop(k, None)
                                         else:
                                             if widget=="checkboxes":
+                                                st.markdown(f"{label}{' *' if req else ''}")
                                                 selected=set(map(str, st.session_state["form_values"].get(k, [])))
                                                 new_selected=[]
                                                 for code,lbl in zip(opts_codes, opts_labels):
