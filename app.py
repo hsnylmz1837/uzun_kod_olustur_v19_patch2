@@ -419,26 +419,49 @@ else:
         fdf=schema["fields"]; optdf=schema["options"]
         for _,sec in secs.iterrows():
             fields=fdf.query("SectionKey==@sec.SectionKey")
+            chain=""###
             for _,fld in fields.iterrows():
                 k=fld["FieldKey"]; typ=str(fld["Type"]).lower(); val=st.session_state['form_values'].get(k)
                 if val in (None,"",[],0): continue
+                piece="" ###
                 if typ=="select":
                     if is_skip_valuecode(val): continue
-                    parts.append(sanitize_codes_only(val))
+                    piece=sanitize_codes_only(val)###
+                    ###parts.append(sanitize_codes_only(val))
                 elif typ=="multiselect" and isinstance(val,list):
                     subset=optdf.query("OptionsKey==@fld.OptionsKey")
                     order_map={str(r["ValueCode"]): int(r["Order"]) for _, r in subset.iterrows()}
                     clean=[v for v in val if not is_skip_valuecode(v)]
                     ordered=sorted(clean, key=lambda v: order_map.get(str(v), 999999))
-                    if ordered: parts.append("".join([sanitize_codes_only(v) for v in ordered]))
+                    if ordered:
+                        ###parts.append("".join([sanitize_codes_only(v) for v in ordered]))
+                        piece="".join([sanitize_codes_only(v) for v in ordered])###
                 elif typ=="number":
                     num=format_number_for_code(val, fld.get("Pad"), fld.get("Decimals"))
                     pre=clean_str(fld.get("EncodeKey")); suf=clean_str(fld.get("SuffixKey"))
-                    parts.append(f"{pre}{num}{suf}" if (pre or suf) else f"{num}")
+                    ###parts.append(f"{pre}{num}{suf}" if (pre or suf) else f"{num}")
+                    piece = f"{pre}{num}{suf}" if (pre or suf) else f"{num}"###
                 else:
                     txt=clean_str(val); pre=clean_str(fld.get("EncodeKey")); suf=clean_str(fld.get("SuffixKey"))
-                    piece=f"{pre}{txt}{suf}" if (pre or suf) else txt
-                    if piece.strip(): parts.append(piece)
+                    ###parts.append(f"{pre}{num}{suf}" if (pre or suf) else f"{num}")
+                    piece=f"{pre}{txt}{suf}" if (pre or suf) else txt###
+                    ###if piece.strip(): parts.append(piece)
+                if not str(piece).strip():###
+                    continue###
+
+                # Adjacent support (only within a section)
+                adj = str(fld.get("Adjacent")).strip().lower() in ("true", "1", "yes")###
+                if adj:###
+                    chain += piece###
+                else:###
+                    if chain:###
+                        parts.append(chain)###
+                        chain = ""###
+                    parts.append(piece)###
+                    
+            # flush chain at end of section
+            if chain:###
+                parts.append(chain)###
         return parts
 
     mk = (st.session_state.get("product_row") or {}).get("MakineTipi")
