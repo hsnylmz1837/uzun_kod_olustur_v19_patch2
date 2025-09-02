@@ -54,9 +54,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def _image_wc(obj, caption=None):
-    """Compat for Streamlit versions: prefer use_container_width, else fallback."""
+    """Compat for Streamlit versions: prefer width, else fallback."""
     try:
-        st.image(obj, caption=caption, use_container_width=True)
+        st.image(obj, caption=caption, width='stretch')
     except TypeError:
         try:
             st.image(obj, caption=caption, use_column_width=True)
@@ -206,7 +206,7 @@ def big_buttons(options, cols=3, key_prefix="bb"):
     cols_list=st.columns(cols); clicked=None
     for i,opt in enumerate(options):
         with cols_list[i%cols]:
-            if st.button(opt, key=f"{key_prefix}_{opt}", use_container_width=True): clicked=opt
+            if st.button(opt, key=f"{key_prefix}_{opt}", width='stretch'): clicked=opt
     st.markdown('</div>', unsafe_allow_html=True)
     return clicked
 
