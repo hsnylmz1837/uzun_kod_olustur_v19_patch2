@@ -456,14 +456,14 @@ else:
                 else:###
                     if chain:###
                         parts.append(chain)###
-                        print(parts)
                         chain = ""###
-                        print(chain)
                     parts.append(piece)###
                     
             # flush chain at end of section
             if chain:###
                 parts.append(chain)###
+            print(parts)
+            print(chain)
         return parts
 
     mk = (st.session_state.get("product_row") or {}).get("MakineTipi")
