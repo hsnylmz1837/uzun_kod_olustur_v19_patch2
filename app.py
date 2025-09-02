@@ -49,6 +49,7 @@ st.markdown("""
 .stepbtns div[data-testid="column"] .stButton>button{width:100%;height:120px;padding:12px 16px;font-size:28px;font-weight:700;border-radius:18px;border:1px solid #334155;background:#0b1220;color:#e5e7eb;}
 .stepbtns div[data-testid="column"] .stButton>button:hover{border-color:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,0.25) inset;}
 .ghost{opacity:0.5;pointer-events:none;}
+.flabel { font-size: 0.9rem; font-weight: 500; margin:6px 0 4px; display:block; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -347,7 +348,7 @@ else:
                                             else: st.session_state["form_values"].pop(k, None)
                                         else:
                                             if widget=="checkboxes":
-                                                st.markdown(f"{label}{' *' if req else ''}")
+                                                st.markdown(f"<div class='flabel'>{label}{' *' if req else ''}</div>")
                                                 selected=set(map(str, st.session_state["form_values"].get(k, [])))
                                                 new_selected=[]
                                                 for code,lbl in zip(opts_codes, opts_labels):
