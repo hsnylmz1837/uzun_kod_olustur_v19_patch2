@@ -10,13 +10,38 @@ def force_rerun():
     st.session_state["_pulse"] = time.time()
     st.rerun()
 
-sel = st.radio(
-    "Elektrik Altyapısı",
-    options=opts,           # <- burada virgül var
+# --- options listesini hazırla ---
+# rows: ilgili options DataFrame'inden, Prereq filtresi vs. sonrası satırlar
+rows = rows.sort_values("Order")  # zaten sıralıysa gerek yok
+
+# ekranda gözükecek metinler ve asıl kodlar
+opt_display = [f"{r.ValueCode} — {r.ValueLabel}" for r in rows.itertuples()]
+opt_codes   = [r.ValueCode for r in rows.itertuples()]
+display2code = dict(zip(opt_display, opt_codes))
+
+# 2) index belirle
+state_key = f"k_{fldkey}"
+stored = st.session_state.get(state_key) or None  # önceki seçim (display veya code olabilir)
+ix = 0
+if stored:
+    if stored in opt_display:
+        ix = opt_display.index(stored)
+    elif stored in opt_codes:
+        ix = opt_codes.index(stored)
+
+# 3) widget
+label = "Elektrik Altyapısı"
+sel_display = st.radio(
+    label,
+    options=opt_display,     # <— burada artık 'opts' yerine opt_display var
     index=ix,
-    key=f"k_{fldkey}",
-    on_change=_force_rerun, # <- doğru parametre adı ve doğru yerde
+    key=state_key,
+    on_change=_force_rerun,  # <— doğru parametre adı
 )
+
+# 4) seçimi koda çevir ve sakla
+sel_code = display2code.get(sel_display)
+st.session_state.setdefault("values", {})[fldkey] = sel_code
 
 import qrcode
 
@@ -295,7 +320,7 @@ else:
                                                              format_func=lambda c: opts_labels[opts_codes.index(c)],
                                                              index=None, key=f"k_{k}", disabled=disabled, horizontal=False)
                                             else:
-                                                sel=st.selectbox(label+(" *" if req else ""), on_change=force_rerun, options=opts_codes,
+                                                sel=st.selectbox(label+(" *" if req else ""), on_change=force_rerun, options=opt_display,
                                                                  format_func=lambda c: opts_labels[opts_codes.index(c)],
                                                                  index=None, key=f"k_{k}", disabled=disabled, placeholder="Seçiniz")
                                             if en and sel is not None: st.session_state["form_values"][k]=sel
@@ -311,7 +336,7 @@ else:
                                                 if en and new_selected: st.session_state["form_values"][k]=new_selected
                                                 else: st.session_state["form_values"].pop(k, None)
                                             else:
-                                                ms=st.multiselect(label+(" *" if req else ""), on_change=force_rerun, options=opts_codes, default=[],
+                                                ms=st.multiselect(label+(" *" if req else ""), on_change=force_rerun, options=opt_display, default=[],
                                                                   format_func=lambda c: opts_labels[opts_codes.index(c)],
                                                                   key=f"k_{k}", disabled=disabled, placeholder="Seçiniz")
                                                 if en and ms: st.session_state["form_values"][k]=ms
