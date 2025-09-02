@@ -33,11 +33,9 @@ def _go_home():
 # match Streamlit widget label size
 st.markdown('<style>.field-label{font-size:0.875rem;font-weight:600;line-height:1.25rem;}</style>', unsafe_allow_html=True)
 # quick access
-try:
-    st.sidebar.button('🏠 Anasayfa', use_container_width=True, on_click=_go_home)
-except TypeError:
-    # streamlit < 1.27 doesn't support use_container_width here
-    st.sidebar.button('🏠 Anasayfa', on_click=_go_home)
+st.write("")
+if st.button("🏠 Anasayfa", key="home_btn_top"):
+    _go_home()
 # --- end v19_patch3 block ---
 
 import qrcode
