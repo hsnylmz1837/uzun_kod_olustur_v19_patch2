@@ -348,7 +348,7 @@ else:
                                             else: st.session_state["form_values"].pop(k, None)
                                         else:
                                             if widget=="checkboxes":
-                                                st.markdown(f"<div class='flabel'>{label}{' *' if req else ''}</div>")
+                                                st.markdown(<div class='flabel'>f"{label}{' *' if req else ''}"</div>)
                                                 selected=set(map(str, st.session_state["form_values"].get(k, [])))
                                                 new_selected=[]
                                                 for code,lbl in zip(opts_codes, opts_labels):
