@@ -410,7 +410,7 @@ else:
             return str(nv)
         else:
             d=int(decimals); return f"{nf:.{d}f}"
-"""
+
     def build_parts(machine_type, schema, s1, s2):
         parts=[]
         m=sanitize_codes_only(machine_type) if machine_type else ""
@@ -439,9 +439,9 @@ else:
                     txt=clean_str(val); pre=clean_str(fld.get("EncodeKey")); suf=clean_str(fld.get("SuffixKey"))
                     piece=f"{pre}{txt}{suf}" if (pre or suf) else txt
                     if piece.strip(): parts.append(piece)
-            return parts
-"""
+        return parts
 
+"""
 def build_parts(machine_type, schema, s1, s2):
     parts = []
     m = sanitize_codes_only(machine_type) if machine_type else ""
@@ -495,6 +495,7 @@ def build_parts(machine_type, schema, s1, s2):
 
     # <<< ÖNEMLİ: return artık döngülerin DIŞINDA >>>
     return parts
+    """
 
     mk = (st.session_state.get("product_row") or {}).get("MakineTipi")
     s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
