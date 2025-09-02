@@ -103,7 +103,7 @@ def sanitize_codes_only(s):
     return re.sub(r"[^A-Z0-9._-]","",str(s).upper()) if s is not None else ""
 
 def norm(s): return str(s).strip().casefold()
-def is_skip_valuecode(code): return norm(code) in {"yok","diger","diğer","var"} # uzun kodda atlanacak valuecodelar # 'diger' varyantını da kapsa
+def is_skip_valuecode(code): return norm(code) in {"yok","diger","diğer","var","tek","çift","cift"} # uzun kodda atlanacak valuecodelar # 'diger' varyantını da kapsa
 def parse_allow_values(s): 
     """
     PrereqAllowValues hücresini güvenli şekilde listeye çevirir.
