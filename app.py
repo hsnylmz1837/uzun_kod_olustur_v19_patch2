@@ -336,11 +336,11 @@ else:
                                         opts_labels=(opts["ValueCode"].astype(str)+" — "+opts["ValueLabel"].astype(str)).tolist()
                                         if typ=="select":
                                             if widget=="radio":
-                                                sel=st.radio(label+(" *" if req else "", on_change=_force_rerun), options=opts_codes,
+                                                sel=st.radio(label+(" *" if req else ""), on_change=_force_rerun, options=opts_codes,
                                                              format_func=lambda c: opts_labels[opts_codes.index(c)],
                                                              index=None, key=f"k_{k}", disabled=disabled, horizontal=False)
                                             else:
-                                                sel=st.selectbox(label+(" *" if req else "", on_change=_force_rerun), options=opts_codes,
+                                                sel=st.selectbox(label+(" *" if req else ""), on_change=_force_rerun, options=opts_codes,
                                                                  format_func=lambda c: opts_labels[opts_codes.index(c)],
                                                                  index=None, key=f"k_{k}", disabled=disabled, placeholder="Seçiniz")
                                             if en and sel is not None: st.session_state["form_values"][k]=sel
