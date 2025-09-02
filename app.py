@@ -426,7 +426,10 @@ else:
                 piece="" ###
                 if typ=="select":
                     if is_skip_valuecode(val): continue
-                    piece=sanitize_codes_only(val)###
+                    current_selection=sanitize_codes_only(val)###
+                    pre=clean_str(fld.get("EncodeKey")); suf=clean_str(fld.get("SuffixKey"))###
+                    piece = f"{pre}{current_selection}{suf}" if (pre or suf) else f"{current_selection}"###
+                    ###piece=sanitize_codes_only(val)###
                     ###parts.append(sanitize_codes_only(val))
                 elif typ=="multiselect" and isinstance(val,list):
                     subset=optdf.query("OptionsKey==@fld.OptionsKey")
