@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
-def _force_rerun():
+def force_rerun():
     try:
         st.rerun()
     except Exception:
@@ -204,7 +204,7 @@ else:
     else:
         display=(prods["UrunAdi"]+" — "+prods["MakineTipi"]).tolist()
     st.session_state.setdefault("product_choice", display[0])
-    sel = st.radio("Ürün", options=display, key="product_choice", on_change=_force_rerun)
+    sel = st.radio("Ürün", options=display, key="product_choice", on_change=force_rerun)
     ix = display.index(sel)
     chosen = prods.iloc[ix].to_dict()
     prev = st.session_state.get("product_row")
@@ -283,11 +283,11 @@ else:
                                         opts_labels=(opts["ValueCode"].astype(str)+" — "+opts["ValueLabel"].astype(str)).tolist()
                                         if typ=="select":
                                             if widget=="radio":
-                                                sel=st.radio(label+(" *" if req else "", on_change=_force_rerun), options=opts_codes,
+                                                sel=st.radio(label+(" *" if req else "", on_change=force_rerun), options=opts_codes,
                                                              format_func=lambda c: opts_labels[opts_codes.index(c)],
                                                              index=None, key=f"k_{k}", disabled=disabled, horizontal=False)
                                             else:
-                                                sel=st.selectbox(label+(" *" if req else "", on_change=_force_rerun), options=opts_codes,
+                                                sel=st.selectbox(label+(" *" if req else "", on_change=force_rerun), options=opts_codes,
                                                                  format_func=lambda c: opts_labels[opts_codes.index(c)],
                                                                  index=None, key=f"k_{k}", disabled=disabled, placeholder="Seçiniz")
                                             if en and sel is not None: st.session_state["form_values"][k]=sel
@@ -298,12 +298,12 @@ else:
                                                 new_selected=[]
                                                 st.markdown(f"<div class='chk-label'>{label}{' *' if req else ''}</div>", unsafe_allow_html=True)
                                                 for code,lbl in zip(opts_codes, opts_labels):
-                                                    chk=st.checkbox(lbl, key=f"chk_{k}_{code}", value=(code in selected, on_change=_force_rerun), disabled=disabled)
+                                                    chk=st.checkbox(lbl, key=f"chk_{k}_{code}", value=(code in selected, on_change=force_rerun), disabled=disabled)
                                                     if chk: new_selected.append(code)
                                                 if en and new_selected: st.session_state["form_values"][k]=new_selected
                                                 else: st.session_state["form_values"].pop(k, None)
                                             else:
-                                                ms=st.multiselect(label+(" *" if req else "", on_change=_force_rerun), options=opts_codes, default=[],
+                                                ms=st.multiselect(label+(" *" if req else "", on_change=force_rerun), options=opts_codes, default=[],
                                                                   format_func=lambda c: opts_labels[opts_codes.index(c)],
                                                                   key=f"k_{k}", disabled=disabled, placeholder="Seçiniz")
                                                 if en and ms: st.session_state["form_values"][k]=ms
@@ -317,7 +317,7 @@ else:
                                             maxv_i=int(maxv) if pd.notna(maxv) else None
                                             defv_i=int(default) if pd.notna(default) else (minv_i or 0)
                                             step_i=int(step)
-                                            val=st.number_input(label+(" *" if req else "", on_change=_force_rerun), min_value=minv_i, max_value=maxv_i,
+                                            val=st.number_input(label+(" *" if req else "", on_change=force_rerun), min_value=minv_i, max_value=maxv_i,
                                                                 value=defv_i, step=step_i, format="%d", key=f"k_{k}", disabled=disabled)
                                         else:
                                             fmt=f"%.{d}f"
@@ -325,11 +325,11 @@ else:
                                             maxv_f=float(maxv) if pd.notna(maxv) else None
                                             defv_f=float(default) if pd.notna(default) else (minv_f or 0.0)
                                             step_f=float(step) if pd.notna(step) else 10**(-d)
-                                            val=st.number_input(label+(" *" if req else "", on_change=_force_rerun), min_value=minv_f, max_value=maxv_f,
+                                            val=st.number_input(label+(" *" if req else "", on_change=force_rerun), min_value=minv_f, max_value=maxv_f,
                                                                 value=defv_f, step=step_f, format=fmt, key=f"k_{k}", disabled=disabled)
                                         if en: st.session_state["form_values"][k]=val
                                     else:
-                                        txt=st.text_input(label+(" *" if req else "", on_change=_force_rerun), value=clean_str(default),
+                                        txt=st.text_input(label+(" *" if req else "", on_change=force_rerun), value=clean_str(default),
                                                           key=f"k_{k}", disabled=disabled, placeholder="Seçiniz")
                                         if en and txt.strip()!="": st.session_state["form_values"][k]=txt
                                         else: st.session_state["form_values"].pop(k, None)
