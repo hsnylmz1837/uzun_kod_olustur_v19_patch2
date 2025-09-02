@@ -426,7 +426,7 @@ else:
                 piece="" ###
                 if typ=="select":
                     if is_skip_valuecode(val): continue
-                    piece=piece+=sanitize_codes_only(val)###
+                    piece=sanitize_codes_only(val)###
                     ###parts.append(sanitize_codes_only(val))
                 elif typ=="multiselect" and isinstance(val,list):
                     subset=optdf.query("OptionsKey==@fld.OptionsKey")
@@ -435,23 +435,23 @@ else:
                     ordered=sorted(clean, key=lambda v: order_map.get(str(v), 999999))
                     if ordered:
                         ###parts.append("".join([sanitize_codes_only(v) for v in ordered]))
-                        piece=piece.join([sanitize_codes_only(v) for v in ordered])###
+                        piece="".join([sanitize_codes_only(v) for v in ordered])###
                 elif typ=="number":
                     num=format_number_for_code(val, fld.get("Pad"), fld.get("Decimals"))
                     pre=clean_str(fld.get("EncodeKey")); suf=clean_str(fld.get("SuffixKey"))
                     ###parts.append(f"{pre}{num}{suf}" if (pre or suf) else f"{num}")
-                    piece = piece+=f"{pre}{num}{suf}" if (pre or suf) else f"{num}"###
+                    piece = f"{pre}{num}{suf}" if (pre or suf) else f"{num}"###
                 else:
                     txt=clean_str(val); pre=clean_str(fld.get("EncodeKey")); suf=clean_str(fld.get("SuffixKey"))
                     ###parts.append(f"{pre}{num}{suf}" if (pre or suf) else f"{num}")
-                    piece=piece+=f"{pre}{txt}{suf}" if (pre or suf) else txt###
+                    piece=f"{pre}{txt}{suf}" if (pre or suf) else txt###
                     ###if piece.strip(): parts.append(piece)
                 if not str(piece).strip():###
                     continue###
 
                 # Adjacent support (only within a section)
                 adj = str(fld.get("Adjacent")).strip().lower() in ("true", "1", "yes")###
-                if adj:###
+                if TRUE:###
                     chain += piece###
                 else:###
                     if chain:###
