@@ -453,11 +453,12 @@ else:
                 adj = str(fld.get("Adjacent")).strip().lower() in ("true", "1", "yes")###
                 if adj:###
                     chain += piece###
-                    print("1chain:"&chain)
                 else:###
                     if chain:###
                         parts.append(chain)###
+                        print(parts)
                         chain = ""###
+                        print(chain)
                     parts.append(piece)###
                     
             # flush chain at end of section
