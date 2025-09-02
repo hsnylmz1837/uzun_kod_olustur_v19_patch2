@@ -417,9 +417,10 @@ else:
         if m: parts.append(m)
         secs=schema["sections"].query("Kategori1==@s1 and Kategori2==@s2 and MakineTipi==@machine_type").sort_values("Order")
         fdf=schema["fields"]; optdf=schema["options"]
+        chain=""
         for _,sec in secs.iterrows():
             fields=fdf.query("SectionKey==@sec.SectionKey")
-            chain=""###
+            #chain=""###
             for _,fld in fields.iterrows():
                 k=fld["FieldKey"]; typ=str(fld["Type"]).lower(); val=st.session_state['form_values'].get(k)
                 if val in (None,"",[],0): continue
@@ -462,7 +463,7 @@ else:
             # flush chain at end of section
             if chain:###
                 parts.append(chain)###
-            return parts
+        return parts
 
     mk = (st.session_state.get("product_row") or {}).get("MakineTipi")
     s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
