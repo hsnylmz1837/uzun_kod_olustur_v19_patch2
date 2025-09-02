@@ -410,7 +410,7 @@ else:
             return str(nv)
         else:
             d=int(decimals); return f"{nf:.{d}f}"
-
+"""
     def build_parts(machine_type, schema, s1, s2):
         parts=[]
         m=sanitize_codes_only(machine_type) if machine_type else ""
@@ -440,6 +440,61 @@ else:
                     piece=f"{pre}{txt}{suf}" if (pre or suf) else txt
                     if piece.strip(): parts.append(piece)
             return parts
+"""
+
+    def build_parts(machine_type, schema, s1, s2):
+        parts = []
+        m = sanitize_codes_only(machine_type) if machine_type else ""
+        if m:
+            parts.append(m)
+    
+        secs = (
+            schema["sections"]
+            .query("Kategori1==@s1 and Kategori2==@s2 and MakineTipi==@machine_type")
+            .sort_values("Order")
+        )
+        fdf = schema["fields"]
+        optdf = schema["options"]
+    
+        for _, sec in secs.iterrows():
+            fields = fdf.query("SectionKey==@sec.SectionKey")
+            for _, fld in fields.iterrows():
+                k   = fld["FieldKey"]
+                typ = str(fld["Type"]).lower()
+                val = st.session_state['form_values'].get(k)
+    
+                if val in (None, "", [], 0):
+                    continue
+    
+                if typ == "select":
+                    if is_skip_valuecode(val):
+                        continue
+                    parts.append(sanitize_codes_only(val))
+    
+                elif typ == "multiselect" and isinstance(val, list):
+                    subset = optdf.query("OptionsKey==@fld.OptionsKey")
+                    order_map = {str(r["ValueCode"]): int(r["Order"]) for _, r in subset.iterrows()}
+                    clean = [v for v in val if not is_skip_valuecode(v)]
+                    ordered = sorted(clean, key=lambda v: order_map.get(str(v), 999999))
+                    if ordered:
+                        parts.append("".join([sanitize_codes_only(v) for v in ordered]))
+    
+                elif typ == "number":
+                    num = format_number_for_code(val, fld.get("Pad"), fld.get("Decimals"))
+                    pre = clean_str(fld.get("EncodeKey"))
+                    suf = clean_str(fld.get("SuffixKey"))
+                    parts.append(f"{pre}{num}{suf}" if (pre or suf) else f"{num}")
+    
+                else:
+                    txt = clean_str(val)
+                    pre = clean_str(fld.get("EncodeKey"))
+                    suf = clean_str(fld.get("SuffixKey"))
+                    piece = f"{pre}{txt}{suf}" if (pre or suf) else txt
+                    if piece.strip():
+                        parts.append(piece)
+    
+        # <<< ÖNEMLİ: return artık döngülerin DIŞINDA >>>
+        return parts
 
     mk = (st.session_state.get("product_row") or {}).get("MakineTipi")
     s1, s2 = st.session_state.get("s1"), st.session_state.get("s2")
