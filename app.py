@@ -452,10 +452,12 @@ else:
                 # Adjacent support (only within a section)
                 #adj = str(fld.get("Adjacent")).strip().lower() in ("true", "1", "yes")###
                 chain += piece
+                
                   
             # flush chain at end of section
             if chain:###
                 parts.append(chain)###
+                chain=""
         return parts
 
     mk = (st.session_state.get("product_row") or {}).get("MakineTipi")
