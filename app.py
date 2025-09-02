@@ -42,7 +42,7 @@ except TypeError:
 
 import qrcode
 
-st.set_page_config(page_title="Uzun Kod — v18.1 / Statik", page_icon="🧩", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Uzun Kod — v19 / Statik", page_icon="🧩", layout="wide", initial_sidebar_state="collapsed")
 
 st.markdown("""
 <style>
@@ -70,7 +70,7 @@ def _image_wc(obj, caption=None):
 
 left, right = st.columns([6,1])
 with left:
-    st.title("Uzun Kod Oluşturma Programı - v18.1 / Statik")
+    st.title("Uzun Kod Oluşturma Programı - v19 / Statik")
     st.caption("Seçtikçe uzun kod otomatik oluşur.")
 with right:
     try:
