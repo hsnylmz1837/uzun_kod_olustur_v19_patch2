@@ -244,7 +244,7 @@ else:
     st.markdown('<div class="panel">', unsafe_allow_html=True)
     #st.header("Makina Tipini seçiniz:")
     #st.write(f"Seçimler: **{s1} → {s2}**")
-    st.markdown("**Önceki Seçimler:**")
+    st.header("**Önceki Seçimler:**")
     st.header(f" \ {s1} \ {s2} \ ")
     st.write("Makina Tipini seçiniz:")
     prods=schema["products"].query("Kategori1==@s1 and Kategori2==@s2")
@@ -267,7 +267,7 @@ else:
     row=st.session_state["product_row"]
     if row is not None:
         mk=row["MakineTipi"]
-        st.info(f"Seçilen makine: **{mk}** — Kod: **{row['UrunKodu']}**")
+        st.info(f":red[Seçilen makine: **{mk}** — Kod: **{row['UrunKodu']}**]")
         secs=schema["sections"].query("Kategori1==@s1 and Kategori2==@s2 and MakineTipi==@mk").sort_values("Order")
         if secs.empty:
             st.warning("Bu makine için 'sections' sayfasında kayıt yok.")
