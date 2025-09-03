@@ -67,8 +67,7 @@ left, right = st.columns([6,1])
 with left:
     st.title("Uzun Kod Oluşturma Programı - v19 / Statik")
     #st.caption("selamınaleyküm")
-    st.caption('<p class="caption">New image</p>')
-    chips_html="".join([f'<span class="token{" new" if i>=common else ""}">{p}</span>' for i,p in enumerate(new_parts)])
+    st.caption(<p class="caption">"New image"</p>)
 with right:
     try:
         _image_wc("data/coiltech_logo.png")
