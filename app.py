@@ -47,13 +47,11 @@ st.markdown("""
 .token{display:inline-block;background:#111827;border:1px solid #334155;color:#e5e7eb;padding:4px 8px;border-radius:999px;margin:2px;font-size:0.85rem;}
 .token.new{background:#065f46;border-color:#064e3b;color:#ecfdf5;}
 .stepbtns div[data-testid="column"] .stButton>button{width:100%;height:120px;padding:12px 16px;font-size:28px;font-weight:700;border-radius:18px;border:1px solid #334155;background:#0b1220;color:#e5e7eb;}
-.stepbtns div[data-testid="column"] .stButton>button:hover{border-color:#fa003f;box-shadow:0 0 0 2px rgba(250,0,63,0.25) inset;}
+.stepbtns div[data-testid="column"] .stButton>button:hover{border-color:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,0.25) inset;}
 .ghost{opacity:0.5;pointer-events:none;}
 .flabel{ font-size: 0.9rem; font-weight: 500; margin:6px 0 4px; display:block; }
 </style>
 """, unsafe_allow_html=True)
-
-#22c55e rgba(34,197,94,0.25)
 
 def _image_wc(obj, caption=None):
     """Compat for Streamlit versions: prefer width, else fallback."""
