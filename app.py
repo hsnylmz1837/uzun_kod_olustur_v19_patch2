@@ -66,7 +66,7 @@ def _image_wc(obj, caption=None):
 left, right = st.columns([6,1])
 with left:
     st.title("Uzun Kod Oluşturma Programı - v19 / Statik")
-    st.caption(":blue[selamınaleyküm]")
+    st.caption("---")
 with right:
     try:
         _image_wc("data/coiltech_logo.png")
@@ -244,6 +244,7 @@ else:
     s1, s2 = st.session_state["s1"], st.session_state["s2"]
     st.markdown('<div class="panel">', unsafe_allow_html=True)
     st.header("Aşama 3 — Ürün ve Detay 🔗")
+    st.write("**Seçimler:**)
     st.write(f"Seçimler: **{s1} → {s2}**")
     prods=schema["products"].query("Kategori1==@s1 and Kategori2==@s2")
     if prods.empty:
