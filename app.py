@@ -251,7 +251,8 @@ else:
     if prods.empty:
         st.warning("Bu seçim için 'products' sayfasında satır yok.")
     else:
-        display=(prods["UrunAdi"]+" — "+prods["MakineTipi"]).tolist()
+        #display=(prods["UrunAdi"]+" — "+prods["MakineTipi"]).tolist()
+        display=(prods["MakineTipi"]+" — "+prods["UrunAdi"]).tolist()
     st.session_state.setdefault("product_choice", display[0])
     sel = st.radio("Ürün", options=display, key="product_choice", on_change=_force_rerun)
     ix = display.index(sel)
