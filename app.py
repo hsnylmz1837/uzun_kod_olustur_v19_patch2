@@ -244,7 +244,7 @@ else:
     s1, s2 = st.session_state["s1"], st.session_state["s2"]
     st.markdown('<div class="panel">', unsafe_allow_html=True)
     st.header("Aşama 3 — Ürün ve Detay 🔗")
-    st.write("**Seçimler:**)
+    st.write("**Seçimler:**")
     st.write(f"Seçimler: **{s1} → {s2}**")
     prods=schema["products"].query("Kategori1==@s1 and Kategori2==@s2")
     if prods.empty:
