@@ -244,9 +244,9 @@ else:
     st.markdown('<div class="panel">', unsafe_allow_html=True)
     #st.header("Makina Tipini seçiniz:")
     #st.write(f"Seçimler: **{s1} → {s2}**")
-    st.write("**Önceki Seçimler:**")
-    st.write(f" \ {s1} \ {s2} \ ")
-    st.header("Makina Tipini seçiniz:")
+    st.header("**Önceki Seçimler:**")
+    st.header(f" \ {s1} \ {s2} \ ")
+    st.write("Makina Tipini seçiniz:")
     prods=schema["products"].query("Kategori1==@s1 and Kategori2==@s2")
     if prods.empty:
         st.warning("Bu seçim için 'products' sayfasında satır yok.")
