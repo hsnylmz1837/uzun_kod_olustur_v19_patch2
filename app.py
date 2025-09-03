@@ -68,7 +68,7 @@ with left:
     st.title("Uzun Kod Oluşturma Programı - v19 / Statik")
     st.caption(":blue[selamınaleyküm]")
     #st.caption("A caption with _italics_ :blue[colors] and emojis :sunglasses:")
-    st.caption(<p class="caption">"New image"</p>)
+    #st.caption(<p class="caption">"New image"</p>)
 with right:
     try:
         _image_wc("data/coiltech_logo.png")
