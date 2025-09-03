@@ -244,7 +244,7 @@ else:
     st.markdown('<div class="panel">', unsafe_allow_html=True)
     #st.header("Makina Tipini seçiniz:")
     #st.write(f"Seçimler: **{s1} → {s2}**")
-    st.header("**Önceki Seçimler:**")
+    st.title("**Önceki Seçimler:**")
     st.header(f" \ {s1} \ {s2} \ ")
     st.write("Makina Tipini seçiniz:")
     prods=schema["products"].query("Kategori1==@s1 and Kategori2==@s2")
