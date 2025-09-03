@@ -46,7 +46,7 @@ st.markdown("""
 .panel{background:#0f172a;color:#e5e7eb;padding:18px;border-radius:14px;border:1px solid #1f2937;box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);margin-bottom:14px;}
 .token{display:inline-block;background:#111827;border:1px solid #334155;color:#e5e7eb;padding:4px 8px;border-radius:999px;margin:2px;font-size:0.85rem;}
 .token.new{background:#065f46;border-color:#064e3b;color:#ecfdf5;}
-.stepbtns div[data-testid="column"] .stButton>button{width:100%;height:500px;padding:12px 16px;font-size:28px;font-weight:700;border-radius:18px;border:1px solid #334155;background:#0b1220;color:#e5e7eb;}
+.stepbtns div[data-testid="column"] .stButton>button{width:100%;height:120px;padding:12px 16px;font-size:28px;font-weight:700;border-radius:18px;border:1px solid #334155;background:#0b1220;color:#e5e7eb;}
 .stepbtns div[data-testid="column"] .stButton>button:hover{border-color:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,0.25) inset;}
 .ghost{opacity:0.5;pointer-events:none;}
 </style>
@@ -205,7 +205,7 @@ def big_buttons(options, cols=3, key_prefix="bb"):
     cols_list=st.columns(cols); clicked=None
     for i,opt in enumerate(options):
         with cols_list[i%cols]:
-            if st.button(opt, key=f"{key_prefix}_{opt}", width='stretch'): clicked=opt
+            if st.button(opt, key=f"{key_prefix}_{opt}", width='stretch', height="250px"): clicked=opt
     st.markdown('</div>', unsafe_allow_html=True)
     return clicked
 
