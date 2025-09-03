@@ -66,7 +66,8 @@ def _image_wc(obj, caption=None):
 left, right = st.columns([6,1])
 with left:
     st.title("Uzun Kod Oluşturma Programı - v19 / Statik")
-    #st.caption("selamınaleyküm")
+    st.caption(":blue[selamınaleyküm]")
+    #st.caption("A caption with _italics_ :blue[colors] and emojis :sunglasses:")
     st.caption(<p class="caption">"New image"</p>)
 with right:
     try:
