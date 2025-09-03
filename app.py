@@ -205,7 +205,7 @@ def big_buttons(options, cols=3, key_prefix="bb"):
     cols_list=st.columns(cols); clicked=None
     for i,opt in enumerate(options):
         with cols_list[i%cols]:
-            if st.button(opt, key=f"{key_prefix}_{opt}", width='stretch', height=250): clicked=opt
+            if st.button(opt, key=f"{key_prefix}_{opt}", width='stretch'): clicked=opt
     st.markdown('</div>', unsafe_allow_html=True)
     return clicked
 
