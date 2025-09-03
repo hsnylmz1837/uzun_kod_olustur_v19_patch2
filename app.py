@@ -66,7 +66,7 @@ def _image_wc(obj, caption=None):
 left, right = st.columns([6,1])
 with left:
     st.title("Uzun Kod Oluşturma Programı - v19 / Statik")
-    st.caption(":black[selamınaleyküm]")
+    st.caption(":blue[selamınaleyküm]")
 with right:
     try:
         _image_wc("data/coiltech_logo.png")
