@@ -246,7 +246,7 @@ else:
     #st.header("Makina Tipini seçiniz:")
     #st.write(f"Seçimler: **{s1} → {s2}**")
     st.write("**Seçimler:**")
-    st.caption(:red[f"**\ {s1}\ {s2} >>**"])
+    st.caption(f":red[**\ {s1}\ {s2} >>**]")
     st.write("Makina Tipini seçiniz:")
     prods=schema["products"].query("Kategori1==@s1 and Kategori2==@s2")
     if prods.empty:
