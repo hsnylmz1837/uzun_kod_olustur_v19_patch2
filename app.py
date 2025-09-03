@@ -246,7 +246,7 @@ else:
     #st.write(f"Seçimler: **{s1} → {s2}**")
     st.write("**Seçimler:**")
     #.caption{ color:#ff0000; font-size: 0.9rem; font-weight: 500; margin:6px 0 4px; display:block; }
-    st.markdown(f"**\ {s1}\ {s2} \ **")
+    st.caption(f"**\ {s1} \ {s2} \ **")
     st.write("Makina Tipini seçiniz:")
     prods=schema["products"].query("Kategori1==@s1 and Kategori2==@s2")
     if prods.empty:
