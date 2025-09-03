@@ -66,7 +66,8 @@ def _image_wc(obj, caption=None):
 left, right = st.columns([6,1])
 with left:
     st.title("Uzun Kod Oluşturma Programı - v19 / Statik")
-    st.caption("Seçtikçe uzun kod otomatik oluşur.")
+    #st.caption("selamınaleyküm")
+    st.caption('<p style="font-family:sans-serif; color:Green; font-size: 42px;">New image</p>')
 with right:
     try:
         _image_wc("data/coiltech_logo.png")
@@ -218,7 +219,7 @@ except Exception as e:
 
 if st.session_state["step"]==1:
     st.markdown('<div class="panel">', unsafe_allow_html=True)
-    st.header("Aşama 1 — Ürün ve Detay ↪️")
+    st.header("1. Hangi kategorideki bir makinayı oluşturmak istiyorsunuz?")
     s1_candidates=[x for x in S1_ORDER if x in schema["products"]["Kategori1"].unique().tolist()]
     clicked=big_buttons(s1_candidates, cols=3, key_prefix="s1")
     st.markdown('</div>', unsafe_allow_html=True)
@@ -228,7 +229,7 @@ if st.session_state["step"]==1:
 
 elif st.session_state["step"]==2:
     st.markdown('<div class="panel">', unsafe_allow_html=True)
-    st.header("Aşama 2 — Alt Seçim")
+    st.header("2. Hangi ürün grubundaki bir makinayı oluşturmak istiyorsunuz?")
     st.write(f"Seçimler: **{st.session_state['s1']}**")
     sub=schema["products"].query("Kategori1 == @st.session_state['s1']")["Kategori2"].dropna().unique().tolist()
     clicked=big_buttons(sub, cols=3, key_prefix="s2")
