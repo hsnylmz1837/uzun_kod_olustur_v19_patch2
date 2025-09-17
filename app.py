@@ -488,7 +488,7 @@ else:
     st.session_state["long_code"]=" ".join(new_parts)
 
     #chips_html="".join([f'<span class="token{" new" if i>=common else ""}">{p}</span>' for i,p in enumerate(new_parts)])
-    st.markdown(chips_html if chips_html else '<span class="smallmuted">Kod için seçim yapın…</span>', unsafe_allow_html=True)
+    #st.markdown(chips_html if chips_html else '<span class="smallmuted">Kod için seçim yapın…</span>', unsafe_allow_html=True)
 
     if st.session_state["long_code"]:
         st.code(st.session_state["long_code"], language="text")
